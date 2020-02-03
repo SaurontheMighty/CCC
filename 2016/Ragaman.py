@@ -1,38 +1,26 @@
 line1 = input()
 line2 = input()
-anagram1={}
-anagram2={}
 letters=[]
+etters=[]
 
+for i in range(0, len(line1)):
+    if(line1[i] not in letters):
+        letters.append(line1[i])
 
-if("*" in line2):
-    for i in range(0,len(line1)):
-        char=line1[i]
-        if char not in anagram1:
-            anagram1.update({char: 1})
-            letters.append(char)
-        else:
-            x=anagram1.get(char)+1
-            anagram1.update({char: x})
+for i in range(0, len(line2)):
+    if(line2[i] not in etters and line2[i]!="*"):
+        etters.append(line2[i])
 
-    for i in range(0,len(line2)):
-        char=line2[i]
-        if char not in anagram2:
-            anagram2.update({char: 1})
-        else:
-            x=anagram2.get(char)+1
-            anagram2.update({char: x})
+counter=True
+    
+for i in letters:
+    if(line1.count(i)<line2.count(i)):
+        counter=False
+        print("N")
+        break
 
-    for i in range(0,len(anagram1)):
-        anagram1["*"]=anagram1[letters[i]]
-        anagram1.pop(letters[i])
-        if(anagram1==anagram2):
-            print("A")
-            break
-        else:
-            anagram1[letters[i]]=anagram1["*"]
-            anagram1.pop("*")
-    print("N")
-else:
-    print("N")
-
+if(counter==True):
+    if(all(x in letters for x in etters)): 
+        print("A")
+    else:
+        print("N")
