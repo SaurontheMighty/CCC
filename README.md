@@ -1,1 +1,1 @@
-Solutions for the Canadian Computing Contest in Python
+Solutions for the Canadian Computing Contest in Python 3
