@@ -1,240 +1,85 @@
-#ARITHMETIC SQUARE
-#SaurontheMighty
-import sys
-#Input
-i1=sys.stdin.readline()
-i2=sys.stdin.readline()
-i3=sys.stdin.readline()
+l1 = input().split(" ")
+l2 = input().split(" ")
+l3 = input().split(" ")
 
-l1=[]
-l2=[]
-l3=[]
+matrix=[]
+matrix.append(l1)
+matrix.append(l2)
+matrix.append(l3)
 
-l1x=[]
-l2x=[]
-l3x=[]
+def row():
+    for i in range(0,3):
+        t1 = matrix[i][0]
+        t2 = matrix[i][1]
+        t3 = matrix[i][2]
 
-xn1=0
-xn2=0
-xn3=0
+        c= matrix[i]
+        n = c.count("X")
+        if(n==1):
+            if(t1=="X"):
+                t1= int(2*int(t2)-int(t3))
+            elif(t2=="X"):
+                t2= int(int(t1)+(int(t3)-int(t1))/2)
+            elif(t3=="X"):
+                t3= int(2*int(t2)-int(t1))
 
-yn1=0
-yn2=0
-yn3=0
+        temp=[]
+        temp.append(t1)
+        temp.append(t2)
+        temp.append(t3)
+        matrix.pop(i)
+        matrix.insert(i,temp)
 
-i1=i1.rstrip("\n")
-i2=i2.rstrip("\n")
-i3=i3.rstrip("\n")
+def column():
+    for i in range(0,3):
+        c1=matrix[0][i]
+        c2=matrix[1][i]
+        c3=matrix[2][i]
 
-l1=i1.split(" ")
-l2=i2.split(" ")
-l3=i3.split(" ")
+        temp = [c1,c2,c3]
+        n = temp.count("X")
+        if(n==1):
+            if(c1=="X"):
+                c1= int(int(c2)-(int(c3)-int(c2)))
+            elif(c2=="X"):
+                c2= int(int(c1)+(int(c3)-int(c1))/2)
+            elif(c3=="X"):
+                c3= int(int(c2)+(int(c2)-int(c1)))
 
-for i in  range(0,3):
-    if(l1[i]=="X"):
-        xn1=xn1+1
-        l1x.append(i)
-    if(l2[i]=="X"):
-        xn2=xn2+1
-    if(l3[i]=="X"):
-        xn3=xn3+1
+        matrix[0][i]=c1
+        matrix[1][i]=c2
+        matrix[2][i]=c3
 
-        
-if(l1[0]=="X"):
-    yn1=yn1+1
-if(l2[0]=="X"):
-    yn1=yn1+1
-if(l3[0]=="X"):
-    yn1=yn1+1
-if(l1[1]=="X"):
-    yn2=yn2+1
-if(l2[1]=="X"):
-    yn2=yn2+1
-if(l3[1]=="X"):
-    yn2=yn2+1
-if(l1[2]=="X"):
-    yn3=yn3+1
-if(l2[2]=="X"):
-    yn3=yn3+1
-if(l3[2]=="X"):
-    yn3=yn3+1
+row()
+column()
 
-#Processing
-if(xn1==1):
-    if(l1[2]=="X"):
-        first=int(l1[0])
-        second=int(l1[1])
+c1=matrix[0].count("X")
+c2=matrix[1].count("X")
+c3=matrix[2].count("X")
 
-        d=second-first
-        l1[2]=str(int(second+d))
-        
-    if(l1[1]=="X"):
-        first=int(l1[0])
-        third=int(l1[2])
-        d=(third-first)/2
-        l1[1]=str(int(first+d))
+if(c1==2 and c2==2 and c3==2):
+    r=0
+    for i in range(0,3):
+        m = matrix[1][i]
+        if(m!="X"):
+            r=m
+    matrix[1] = [r,r,r]
+    row()
+    column()
+    row()
 
-    if(l1[0]=="X"):
-        second=int(l1[1])
-        third=int(l1[2])
+c1=matrix[0].count("X")
+c3=matrix[2].count("X")
 
-        d=third-second
-        l1[0]=str(int(second-d))
+m=zip(matrix[0],matrix[1],matrix[2])
 
-#l2
-if(xn2==1):        
-    if(l2[2]=="X"):
-        first=int(l2[0])
-        second=int(l2[1])
+r1=m[0].count("X")
+r3=m[2].count("X")
 
-        d=second-first
-        l2[2]=str(int(second+d))
-            
-    if(l2[1]=="X"):
-        first=int(l2[0])
-        third=int(l2[2])
+if((c1==0 or c3==0) and (r1==0 or r3==0)):
+    if()
 
-        d=(third-first)/2
-        l2[1]=str(int(first+d))
-
-    if(l2[0]=="X"):
-        second=int(l2[1])
-        third=int(l2[2])
-
-        d=third-second
-        l2[0]=str(second-d)
-
-#l3
-if(xn3==1):
-    if(l3[2]=="X"):
-        first=int(l3[0])
-        second=int(l3[1])
-
-        d=second-first
-        l3[2]=str(int(second+d))
-            
-    if(l3[1]=="X"):
-        first=int(l3[0])
-        third=int(l3[2])
-
-        d=(third-first)/2
-        l3[1]=str(int(first+d))
-
-    if(l3[0]=="X"):
-        second=int(l3[1])
-        third=int(l3[2])
-
-        d=third-second
-        l3[0]=str(int(second-d))
-
-xn1=0
-xn2=0
-xn3=0
-
-yn1=0
-yn2=0
-yn3=0
-
-for i in  range(0,3):
-    if(l1[i]=="X"):
-        xn1=xn1+1
-        l1x.append(i)
-    if(l2[i]=="X"):
-        xn2=xn2+1
-    if(l3[i]=="X"):
-        xn3=xn3+1
-
-        
-if(l1[0]=="X"):
-    yn1=yn1+1
-if(l2[0]=="X"):
-    yn1=yn1+1
-if(l3[0]=="X"):
-    yn1=yn1+1
-if(l1[1]=="X"):
-    yn2=yn2+1
-if(l2[1]=="X"):
-    yn2=yn2+1
-if(l3[1]=="X"):
-    yn2=yn2+1
-if(l1[2]=="X"):
-    yn3=yn3+1
-if(l2[2]=="X"):
-    yn3=yn3+1
-if(l3[2]=="X"):
-    yn3=yn3+1
-
-#Processing2
-if(yn1==1):
-    if(l3[0]=="X"):
-        first=int(l1[0])
-        second=int(l2[0])
-
-        d=second-first
-        l3[0]=str(int(second+d))
-            
-    if(l2[0]=="X"):
-        first=int(l1[0])
-        third=int(l3[0])
-
-        d=(third-first)/2
-        l2[0]=str(int(first+d))
-
-    if(l1[0]=="X"):
-        second=int(l2[0])
-        third=int(l3[0])
-
-        d=third-second
-        l1[0]=str(int(second-d))
-
-#l2
-if(yn2==1):
-    if(l3[1]=="X"):
-        first=int(l1[1])
-        second=int(l2[1])
-
-        d=second-first
-        l3[1]=str(int(second+d))
-            
-    if(l2[1]=="X"):
-        first=int(l1[1])
-        third=int(l3[1])
-
-        d=(third-first)/2
-        l2[1]=str(int(first+d))
-
-    if(l1[1]=="X"):
-        second=int(l2[1])
-        third=int(l3[1])
-
-        d=third-second
-        l1[1]=str(int(second-d))
-
-
-#l3
-if(yn3==1):
-    if(l3[2]=="X"):
-        first=int(l1[2])
-        second=int(l2[2])
-
-        d=second-first
-        l3[2]=str(int(second+d))
-            
-    if(l2[2]=="X"):
-        first=int(l1[2])
-        third=int(l3[2])
-
-        d=(third-first)/2
-        l2[2]=str(int(first+d))
-
-    if(l1[2]=="X"):
-        second=int(l2[2])
-        third=int(l3[2])
-
-        d=third-second
-        l1[2]=str(int(second-d))
-
-
-print(l1[0]+" "+l1[1]+" "+l1[2])
-print(l2[0]+" "+l2[1]+" "+l2[2])
-print(l3[0]+" "+l3[1]+" "+l3[2])
+for i in range(0,3):
+    for j in range(0,3):
+        print(matrix[i][j],end=" ")
+    print()
